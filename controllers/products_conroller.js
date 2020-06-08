@@ -216,7 +216,7 @@ module.exports = {
         let { queryObject, sortObj,searchType } = await setQueryObject(req.query);
         let limit = (req.query.limit) ? req.query.limit : 0;
         limit=+limit;
-        let filterCategory = ["category","brand" , "discount", "color", "size"];
+        let filterCategory = ["category","brand" , "color", "size"];
         if(filterCategory.includes(searchType)){
             let index=filterCategory.indexOf(searchType);
            filterCategory.splice(index,1);

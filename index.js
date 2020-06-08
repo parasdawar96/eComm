@@ -45,19 +45,24 @@ app.get("/",(req,res)=>{
     let p= path.resolve(__dirname,'dist','palikaBazaar','index.html');
     res.sendFile(p);
 })
-app.use('/account', routes);
-app.use('/cart', cartRoutes);
-app.post('/addkey', admin_controller.addKeyword)
+app.use('/api/account', routes);
+app.use('/api/cart', cartRoutes);
+app.post('/api/addkey', admin_controller.addKeyword)
 //app.get('/cart/:id',cartCtrl.fetchCart);
-app.post('/purchase',jwtVerification.verifyJwtToken,orderCtrl.purchase);
-app.post('/updateOrder',orderCtrl.updateOrder);
-app.get('/products', products_controller.readAllProducts);
-app.get('/product-details/:id', products_controller.readProduct);
-app.post('/products', admin_controller.addProduct);
-app.put('/products/:id', admin_controller.updateProduct);
-app.delete('/products/deleteAll', admin_controller.deleteAllProduct);
-app.delete('/products/:id', admin_controller.deleteProduct);
-
+app.post('/api/purchase',jwtVerification.verifyJwtToken,orderCtrl.purchase);
+app.post('/api/updateOrder',orderCtrl.updateOrder);
+app.get('/api/products', products_controller.readAllProducts);
+app.get('/api/product-details/:id', products_controller.readProduct);
+app.post('/api/products', admin_controller.addProduct);
+app.put('/api/products/:id', admin_controller.updateProduct);
+app.delete('/api/products/deleteAll', admin_controller.deleteAllProduct);
+app.delete('/api/products/:id', admin_controller.deleteProduct);
+app.get('*', function (req, res) {
+    console.log("p");
+    let p = path.resolve(__dirname, 'dist', 'palikaBazaar', 'index.html');
+    console.log("p", p);
+    res.sendFile(p);
+});
 
 app.use((err, req, res, next) => {
     if (err.name === 'ValidationError') {
