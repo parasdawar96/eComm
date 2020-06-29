@@ -43,6 +43,7 @@ mongoose.connect(process.env.CONNECTION_STRING,
 
 app.get("/",(req,res)=>{
     let p= path.resolve(__dirname,'dist','palikaBazaar','index.html');
+    console.log("p",p);
     res.sendFile(p);
 })
 app.use('/api/account', routes);
